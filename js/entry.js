@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // pagination buttons
+  const prevBtn = document.querySelector("[data-pagination-prev]");
+  const nextBtn = document.querySelector("[data-pagination-next]");
+  // Clear filters button
+  const clearBtn = document.querySelector("#clear");
+  const loading = document.querySelector("page-loader");
+
   // Initialize date picker
   var picker = new Lightpick({
     field: document.getElementById('range-picker'),
@@ -27,18 +34,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Show loading UI
   function stopLoading() {
-    const loading = document.querySelector("page-loader");
     loading.setAttribute("data-loading", "false");
   }
 
   // Hide loading UI
   function startLoading() {
-    const loading = document.querySelector("page-loader");
     loading.setAttribute("data-loading", "true");
   }
 
   // Fetch data between two dates
   async function fetchData(start_date, end_date) {
+    console.log("End date", endDate.format("YYYY-DD-MM"));
+    console.log("date", moment().format("YYYY-DD-MM"));
+    if (endDate.isSame(moment())) prevBtn.setAttribute("disabled", true);
+    else prevBtn.removeAttribute("disabled");
     startLoading();
     const url = `https://api.nasa.gov/planetary/apod?api_key=L8A9FjUIgrdaLM5iLYhLeqY64Pi9e8D9QIf7gIgL&thumbs=true&start_date=${start_date}&end_date=${end_date}`;
     try {
@@ -118,11 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
-  // pagination buttons
-  const prevBtn = document.querySelector("[data-pagination-prev]");
-  const nextBtn = document.querySelector("[data-pagination-next]");
-  // Clear filters button
-  const clearBtn = document.querySelector("#clear");
 
   // Clear filters event
   clearBtn.addEventListener("click", function () {

@@ -51,16 +51,18 @@ template.innerHTML = `
   </style>
   <div class="container">
       <svg viewBox="0 0 110 92" xmlns="http://www.w3.org/2000/svg">
+
         <defs>
           <linearGradient id="left-to-right">
             <stop offset="0" stop-color="#fc3d21">
-              <animate dur="2s" attributeName="offset" fill="freeze" from="0" to="1" repeatCount="indefinite" />
+              <animate dur="1s" attributeName="offset" fill="freeze" from="0" to="1" repeatCount="indefinite" />
             </stop>
             <stop offset="0" stop-color="#fff">
-              <animate dur="2s" attributeName="offset" from="0" to="1" repeatCount="indefinite" />
+              <animate dur="1s" attributeName="offset" from="0" to="1" repeatCount="indefinite" />
             </stop>
           </linearGradient>
         </defs>
+
         <circle cx="50.049" cy="45" fill="#0b3d91" r="40.14"/>
         <g fill="#fff">
         <circle cx="47.679" cy="12.57" r=".45"/>

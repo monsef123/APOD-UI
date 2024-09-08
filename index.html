@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>NASA: APOD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" type="text/css" href="css/lightpick.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script src="js/lightpick.js"></script>
+</head>
+
+<body>
+  <header>
+    <div>
+      <img src="images/logo.png" alt="NASA" class="logo" />
+      <p>Astronomy Picture of the Day</p>
+    </div>
+    <div class="filters-container">
+      <input placeholder="Filter by date" name="date-range" type="text" id="range-picker" />
+      <button id="clear">Clear</button>
+    </div>
+  </header>
+  <details-dialog data-dialog></details-dialog>
+  <page-loader data-loading="true"></page-loader>
+  <div class="container">
+  </div>
+  <footer>
+    <p>Made with ❤️ by Mounsif Meftah</p>
+    <div class="pagination">
+      <button data-pagination-prev>
+        Prev
+      </button>
+      <button data-pagination-next>
+        Next
+      </button>
+    </div>
+  </footer>
+  <script defer src="components/item.js"></script>
+  <script defer src="components/loading.js"></script>
+  <script defer src="components/dialog.js"></script>
+  <script defer src="js/entry.js"></script>
+</body>
+
+</html>

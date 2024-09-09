@@ -1,5 +1,8 @@
-NASA - Astronomy picture of the day UI using pure web components, HTML, CSS, and Vanilla Javascript.
+### NASA - Astronomy picture of the day UI
+##### Built with pure web components, HTML, CSS, and Vanilla Javascript.
 
-Run the project by using:
+This project is using [the public NASA APOD API](https://github.com/nasa/apod-api)
+
+##### Run the project by using:
 - npm start
 - or open index.html file

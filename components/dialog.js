@@ -116,11 +116,26 @@ class DetailsDialog extends HTMLElement {
   }
 
   connectedCallback() {
+    // Set image src
     this.shadowRoot.querySelector(".image").setAttribute("src", this.getAttribute("src"));
+
     const dialog = this.shadowRoot.querySelector("[data-dialog]");
+
+    // Close button click event
     this.shadowRoot.querySelector("[data-close-modal]").addEventListener("click", function () {
       dialog.close();
     })
+
+    // Backdrop click event
+    dialog.addEventListener('click', function (event) {
+      var rect = dialog.getBoundingClientRect();
+      var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+      if (!isInDialog) {
+        dialog.close();
+      }
+    });
+
   }
 
   attributeChangedCallback(name, _, newValue) {

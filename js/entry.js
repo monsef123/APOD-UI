@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
       imageUrl = "images/video-placeholder.png";
     }
     elem.setAttribute("src", imageUrl);
+    elem.setAttribute("data-delay", n);
     const classOrder = n - (count * (ITEM_CLASS_ORDER.length + 1));
     if (n < length - 4) {
       elem.setAttribute("class", ITEM_CLASS_ORDER[classOrder]);

@@ -83,10 +83,12 @@ class PostItem extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.querySelector(".image").setAttribute("src", this.getAttribute("src"));
+    const container = this.shadowRoot.querySelector(".container");
     const className = this.getAttribute("class");
-    if (className) {
-      this.shadowRoot.querySelector(".container").classList.add(this.getAttribute("class"))
+    if (className != null) {
+      container.classList.add(this.getAttribute("class"))
     }
+    container.style.animationDelay = `${parseInt(this.getAttribute("data-delay")) * 0.04}s`;
   }
 }
 

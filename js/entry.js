@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const ITEMS_PER_PAGE = 20;
   // pagination buttons
   const prevBtn = document.querySelector("[data-pagination-prev]");
   const nextBtn = document.querySelector("[data-pagination-next]");
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     field: document.getElementById('range-picker'),
     singleDate: false,
     maxDate: moment(),
-    maxDays: 20,
+    maxDays: ITEMS_PER_PAGE,
     onSelectStart: function (start) {
       startDate = start;
     },
@@ -44,8 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fetch data between two dates
   async function fetchData(start_date, end_date) {
-    console.log("End date", endDate.format("YYYY-DD-MM"));
-    console.log("date", moment().format("YYYY-DD-MM"));
     if (endDate.isSame(moment())) prevBtn.setAttribute("disabled", true);
     else prevBtn.removeAttribute("disabled");
     startLoading();
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Used for first fetch & refetch after clearing filters
   function fetchLatestData() {
-    startDate = moment().subtract(19, "days");
+    startDate = moment().subtract(ITEMS_PER_PAGE - 1, "days");
     endDate = moment();
     fetchData(
       startDate.format("YYYY-MM-DD"),
@@ -140,26 +139,32 @@ document.addEventListener("DOMContentLoaded", function () {
   // Pagination: Next event
   nextBtn.addEventListener("click", function () {
     scrollToTop();
-    startDate = startDate.subtract(19, "days");
-    endDate = endDate.subtract(19, "days");
+    startDate = startDate.subtract(ITEMS_PER_PAGE, "days");
+    endDate = endDate.subtract(ITEMS_PER_PAGE, "days");
     fetchData(
       startDate.format("YYYY-MM-DD"),
       endDate.format("YYYY-MM-DD")
     );
+    prevBtn.removeAttribute("disabled");
   });
 
   // Pagination: Prev event
   prevBtn.addEventListener("click", function () {
     let diff = Math.abs(endDate.diff(moment(), "days"));
+    console.log({ diff })
     if (diff > 0) {
       scrollToTop();
-      diff = diff < 19 ? 19 : diff;
-      startDate = startDate.add(diff, "days");
-      endDate = endDate.add(diff, "days");
+      const offset = diff > ITEMS_PER_PAGE ? ITEMS_PER_PAGE : diff;
+      console.log({ startDate: startDate.format("YYYY-MM-DD"), endDate: endDate.format("YYYY-MM-DD") });
+      startDate = startDate.add(offset, "days");
+      endDate = endDate.add(offset, "days");
       fetchData(
         startDate.format("YYYY-MM-DD"),
         endDate.format("YYYY-MM-DD")
       );
+      if (diff <= 20) {
+        prevBtn.setAttribute("disabled", "true");
+      }
     }
   });
 

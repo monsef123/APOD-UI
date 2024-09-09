@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".container").innerHTML = "";
       const json = await response.json();
       let count = 0;
-      console.log(json);
       json.reverse().map((item, index) => {
         if (index !== 0 && index % 6 === 0) {
           count++;

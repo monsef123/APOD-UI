@@ -108,7 +108,7 @@ dialog_template.innerHTML = `
 `;
 
 class DetailsDialog extends HTMLElement {
-  static observedAttributes = ["src"];
+  static observedAttributes = ["src", "data-link"];
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
@@ -141,6 +141,8 @@ class DetailsDialog extends HTMLElement {
   attributeChangedCallback(name, _, newValue) {
     if (name === "src" && newValue) {
       this.shadowRoot.querySelector(".image").setAttribute("src", newValue);
+    }
+    if (name === "data-link") {
       this.shadowRoot.querySelector(".image-link").setAttribute("href", newValue);
     }
   }

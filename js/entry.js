@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".container").innerHTML = "";
       const json = await response.json();
       let count = 0;
+      console.log(json);
       json.reverse().map((item, index) => {
         if (index !== 0 && index % 6 === 0) {
           count++;
@@ -83,7 +84,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function appendItem(item, n, count, length) {
     const elem = document.createElement("post-item");
     const dialog = document.querySelector("[data-dialog]");
-    elem.setAttribute("src", item.thumbnail_url || item.url);
+    let imageUrl = item.thumbnail_url || item.url;
+    if (item.media_type === "video" && !item.thumbnail_url) {
+      imageUrl = "images/video-placeholder.png";
+    }
+    elem.setAttribute("src", imageUrl);
     const classOrder = n - (count * (ITEM_CLASS_ORDER.length + 1));
     if (n < length - 4) {
       elem.setAttribute("class", ITEM_CLASS_ORDER[classOrder]);
@@ -95,7 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".container");
     container.append(elem);
     elem.addEventListener("click", function () {
-      dialog.setAttribute("src", item.thumbnail_url || item.url);
+      dialog.setAttribute("src", imageUrl);
+      dialog.setAttribute("data-link", item.url);
       dialog.shadowRoot.querySelector("dialog").showModal();
       dialog.innerHTML = `
         <h3 slot="title">${item.title}</h3>

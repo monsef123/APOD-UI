@@ -151,11 +151,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Pagination: Prev event
   prevBtn.addEventListener("click", function () {
     let diff = Math.abs(endDate.diff(moment(), "days"));
-    console.log({ diff })
     if (diff > 0) {
       scrollToTop();
       const offset = diff > ITEMS_PER_PAGE ? ITEMS_PER_PAGE : diff;
-      console.log({ startDate: startDate.format("YYYY-MM-DD"), endDate: endDate.format("YYYY-MM-DD") });
       startDate = startDate.add(offset, "days");
       endDate = endDate.add(offset, "days");
       fetchData(
